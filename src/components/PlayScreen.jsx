@@ -18,7 +18,7 @@ const PlayScreen = () => {
           <img src={leonimage} alt="Lion" className="lion-image" />
           <a className="play-button">PLAY NOW</a>
           <p className="stay-tuned">Stay tuned</p>
-          <p className="more-info">More info at our official channels</p>
+          <p className="more-info">More info at our official</p>
           <div className="social-icons">
             <img src={twitter} alt="Twitter" />
             <img src={facebook} alt="Facebook" />
