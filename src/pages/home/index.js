@@ -33,9 +33,9 @@ const Home = () => {
 
       {/* PlayNow button */}
       <div className="flex  justify-center ">
-        <button className="rounded-md px-7 py-3 font-bold text-md text-white bg-gradient-to-b from-[#99E23B] to-[#547C21]">
+        <Link to={'/mining'} className="rounded-md px-7 py-3 font-bold text-md text-white bg-gradient-to-b from-[#99E23B] to-[#547C21] active:bg-gradient-to-t">
           PLAY NOW
-        </button>
+        </Link>
       </div>
 
       {/* text */}
@@ -46,7 +46,7 @@ const Home = () => {
 
       {/* icons */}
 
-      <div className="flex justify-evenly mt-4 px-20">
+      <div className="flex justify-evenly mt-4 px-[20%]">
         <Link to={"#"} className="p-2 bg-black rounded-full">
           <FaTelegramPlane className="text-white text-2xl" />
         </Link>
