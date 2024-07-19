@@ -15,7 +15,7 @@ import { FaFacebookF } from "react-icons/fa";
 const Home = () => {
   return (
     <div
-      className="border-2 border-red-600 w-[100vw]] h-[100vh]"
+      className="w-[100vw]"
       style={{
         background: `url(${MainBackground})`,
         backgroundRepeat: "no-repeat",
