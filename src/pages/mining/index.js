@@ -1,26 +1,88 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Components import
 import DetailsButton from "../../components/detailsButton";
 
 // images import
-import ButtonCoin from "../../assests/svgs/button-coin-icon.svg";
-import ButtonLion from "../../assests/svgs/button-lion-face.svg";
-import CountingCoin from "../../assests/svgs/counting-coin.svg";
-import TapCoin from "../../assests/svgs/main-big-tap-coin.svg";
-import ShockIcon from "../../assests/svgs/shock-icon.svg";
+import { ButtonCoin, ButtonLion, CountingCoin, TapCoin, ShockIcon, MainBackground } from '../../assests/svgs/index'
+
+const levelThresholds = [
+  { name: "Bronze", maxLevel: 10 },
+  { name: "Silver", maxLevel: 20 },
+  { name: "Gold", maxLevel: 30 },
+];
 
 const Mining = () => {
-  const [availableBalance, setAvailableBalance] = useState(10000000);
+  const [availableBalance, setAvailableBalance] = useState(0); // Initial balance of zero
+  const [levelProgress, setLevelProgress] = useState(0); // Initial progress of 0% (0-100 scale)
+  const [shockValue, setShockValue] = useState(1000); // Initial shock value
+  const [currentLevel, setCurrentLevel] = useState(1); // Start at level 1
+  const [currentTier, setCurrentTier] = useState(levelThresholds[0].name); // Start at Bronze
+  const [canTap, setCanTap] = useState(true); // State to track if user can tap
+
+  const perTapValue = 1; // Per tap value is set to 1 coin
+  const shockDecrement = 10; // Shock value decrement per tap
+  const shockIncrement = 5; // Shock value increment over time
+  const shockIncrementInterval = 1000; // Interval in milliseconds for shock value increment
+  const coinsPerLevel = 10000; // Coins required to level up
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShockValue((prevShock) => {
+        if (prevShock < 1000) {
+          return prevShock + shockIncrement;
+        }
+        return prevShock;
+      });
+    }, shockIncrementInterval);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (shockValue > 0) {
+      setCanTap(true);
+    }
+  }, [shockValue]);
 
   const handleButtonClick = () => {
-    setAvailableBalance((prevBalance) => prevBalance + 100);
-  };
-  
-  return (
-    <div className="bg-black">
-      {/* Top 2 buttons */}
+    if (!canTap) return;
 
+    setAvailableBalance((prevBalance) => {
+      const newBalance = prevBalance + perTapValue;
+      if (newBalance >= coinsPerLevel) {
+        setCurrentLevel((prevLevel) => {
+          const newLevel = prevLevel + 1;
+          const newTier = levelThresholds.find((threshold) => newLevel <= threshold.maxLevel)?.name || "Bronze";
+          setCurrentTier(newTier);
+          return newLevel;
+        });
+        setLevelProgress(0);
+        return newBalance % coinsPerLevel;
+      }
+      setLevelProgress((newBalance / coinsPerLevel) * 100);
+      return newBalance;
+    });
+
+    setShockValue((prevShock) => {
+      const newShock = prevShock - shockDecrement;
+      if (newShock <= 0) {
+        setCanTap(false);
+        return 0;
+      }
+      return newShock;
+    });
+  };
+
+  return (
+    <div
+      className="w-[100vw] pb-6 pt-1"
+      style={{
+        background: `url(${MainBackground})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
+      {/* Top 2 buttons */}
       <div className="flex justify-between mx-4 pt-14 pb-10">
         <button className="bg-gradient-to-b from-[#99E23B] to-[#547C21] px-2 py-1 rounded-lg">
           <div className="flex items-center gap-x-2">
@@ -28,7 +90,6 @@ const Mining = () => {
             <p className="text-center text-xs text-white">Person Name</p>
           </div>
         </button>
-
         <button className="bg-gradient-to-b from-[#99E23B] to-[#547C21] px-2 py-1 rounded-lg">
           <div className="flex items-center gap-x-2">
             <img src={ButtonLion} />
@@ -38,51 +99,55 @@ const Mining = () => {
       </div>
 
       <div className="bg-gradient-to-b from-[#74561d] via-[#303c20] to-[#303c20] py-6 rounded-t-3xl shadow-lg shadow-[#9b8255]">
-        <div className="flex justify-around">
-          {/* 3 details button  */}
-          <DetailsButton heading={"Earn per Tap"} IsIcon={true} value={"+ 2"} />
-          <DetailsButton
-            heading={"Profit per hour"}
-            IsIcon={false}
-            value={"5 K"}
-          />
-          <DetailsButton heading={"Daily Task"} IsIcon={true} value={"0"} />
+        <div className="flex justify-center space-x-4">
+          {/* 3 details button */}
+          <DetailsButton className="text-center shadow-lg bg-gray-100 p-3  rounded-md" heading={"Earn per Tap"} IsIcon={true} value={`${perTapValue}`} />
+          <DetailsButton className="text-center shadow-lg bg-gray-100 p-4 rounded-md" heading={"Profit per hour"} IsIcon={true} value={"+1"} />
+          <DetailsButton className="text-center shadow-lg bg-gray-100 p-4 rounded-md" heading={"Daily Task"} IsIcon={true} value={"0"} />
         </div>
 
-        {/* coin counting  */}
-
+        {/* Coin counting */}
         <div className="flex items-center">
-          <img src={CountingCoin} className="w-44" />
-          <p className="text-white text-3xl text-center font-semibold">
-           {availableBalance}
-          </p>
+          <img className="w-40" src={CountingCoin} />
+          <p className="text-white text-3xl mr-4 font-semibold">{availableBalance}</p>
         </div>
 
-        {/* Progress bar  */}
-
+        {/* Progress bar */}
         <div className="px-4">
           <div className="flex justify-between mb-1">
-            <p className="text-white text-xs">Level Bronze</p>
-            <p className="text-white text-xs">Level 2/10</p>
+            <p className="text-white text-xs">Level {currentTier}</p>
+            <p className="text-white text-xs">Level {currentLevel}/{levelThresholds.find((threshold) => threshold.name === currentTier)?.maxLevel}</p>
           </div>
-
           <div className="bg-black relative h-4 w-full rounded-2xl">
-            <div className="bg-gradient-to-b from-[#99E23B] to-[#547C21] absolute top-0 left-0 h-full w-1/2 rounded-2xl"></div>
+            <div
+              className="bg-gradient-to-b from-[#99E23B] to-[#547C21] absolute top-0 left-0 h-full rounded-2xl"
+              style={{ width: `${levelProgress}%` }}
+            ></div>
           </div>
         </div>
 
-        {/* Tap coin  */}
+        {/* Tap coin */}
         <div className="text-center">
-          <button onClick={() => setAvailableBalance(availableBalance + 100)}>
+          <button
+            className="transform transition-transform duration-150 active:translate-y-1 focus:outline-none"
+            onClick={handleButtonClick} disabled={!canTap}>
             <img src={TapCoin} />
           </button>
         </div>
 
-        {/* Tap health  */}
-        <div className="flex items-center pb-8 pl-4 gap-x-2 ">
-          <img src={ShockIcon} />
-          <p className="text-center text-white text-xl">1500/2000</p>
+        {/* Tap health */}
+        <div className="flex items-center justify-between pb-8 pl-4 pr-4 w-full">
+          <div className="flex items-center gap-x-2">
+            <img src={ShockIcon} alt="Shock Icon" />
+            <p className="text-center text-white text-xl">{shockValue}/1000</p>
+          </div>
+          <div className="flex items-center gap-x-2">
+            <img src={ShockIcon} alt="Shock Icon" />
+            <p className="text-center text-white text-xl">Boost</p>
+          </div>
         </div>
+
+
       </div>
     </div>
   );

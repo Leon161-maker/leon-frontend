@@ -2,10 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // icons import
-import Tap from "../assests/svgs/layout-icons/tap.svg";
-import Invite from "../assests/svgs/layout-icons/invite.svg";
-import Task from "../assests/svgs/layout-icons/task.svg";
-import Airdrop from "../assests/svgs/layout-icons/airdrop.svg";
+ 
+import {Tap , Invite , Task , Airdrop} from '../assests/svgs/index'
 
 const MainLayout = ({ children }) => {
   return (
@@ -23,7 +21,7 @@ const MainLayout = ({ children }) => {
           <p className="text-sm text-[#B1B0B0]">Task</p>
         </Link>
 
-        <Link to={"#"} className="flex flex-col text-center">
+        <Link to={"/invite"} className="flex flex-col text-center">
           <img src={Invite} />
           <p className="text-sm text-[#B1B0B0]">Invite</p>
         </Link>
