@@ -2,10 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // images import
-import MainBackground from "../../assests/svgs/main-page-bg.svg";
-import LeonLogo from "../../assests/svgs/Leon-Lion-Logo.svg";
-import LeonText from "../../assests/svgs/LEON.svg";
-import LionCharacter from "../../assests/svgs/cute-lion-posing-studi0.svg";
+import {MainBackground, LeonLogo, LeonText, LionCharacter} from '../../assests/svgs/index'
 
 // icons imports
 import { FaTelegramPlane } from "react-icons/fa";
