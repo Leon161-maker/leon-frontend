@@ -15,6 +15,7 @@ import Airdrop from "./layout-icons/airdrop.svg";
 import CoinIcon from "./coin.svg";
 import Gift from './layout-icons/gift.svg'
 import PremiumGift from './layout-icons/premium-gift.svg'
+import Boost from "./boost.svg"
 
 export {
     ButtonCoin,
@@ -32,5 +33,6 @@ export {
     Airdrop,
     CoinIcon,
     Gift,
-    PremiumGift
+    PremiumGift,
+    Boost
 }

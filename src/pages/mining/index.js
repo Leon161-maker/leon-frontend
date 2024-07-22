@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import DetailsButton from "../../components/detailsButton";
 
 // images import
-import { ButtonCoin, ButtonLion, CountingCoin, TapCoin, ShockIcon, MainBackground } from '../../assests/svgs/index'
+import { ButtonCoin, ButtonLion, CountingCoin, TapCoin, ShockIcon, MainBackground, Boost } from '../../assests/svgs/index'
 
 const levelThresholds = [
   { name: "Bronze", maxLevel: 10 },
@@ -142,7 +142,7 @@ const Mining = () => {
             <p className="text-center text-white text-xl">{shockValue}/1000</p>
           </div>
           <div className="flex items-center gap-x-2">
-            <img src={ShockIcon} alt="Shock Icon" />
+            <img src={Boost} alt="Shock Icon" className="w-12" />
             <p className="text-center text-white text-xl">Boost</p>
           </div>
         </div>
