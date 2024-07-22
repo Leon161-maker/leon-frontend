@@ -16,7 +16,7 @@ const MainLayout = ({ children }) => {
           <p className="text-sm text-[#B1B0B0]">Tap</p>
         </Link>
 
-        <Link to={"#"} className="flex flex-col text-center">
+        <Link to={"/settings"} className="flex flex-col text-center">
           <img src={Task} />
           <p className="text-sm text-[#B1B0B0]">Task</p>
         </Link>

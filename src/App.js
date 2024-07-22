@@ -12,6 +12,7 @@ import InviteFriends from './pages/invite';
 
 // layouts imports
 import LayoutRoutes from "./routes/layoutRoutes";
+import Settings from './pages/settings';
 function App() {
   return (
     <div>
@@ -26,7 +27,8 @@ function App() {
           <Route path="/faqs" element={<Faqs />} />
           <Route path="/" element={<LayoutRoutes />}>
             <Route path="mining" element={<Mining />} />
-            <Route path='/invite' element={<InviteFriends />} />
+            <Route path='invite' element={<InviteFriends />} />
+            <Route path='settings' element={<Settings />} />
           </Route>
         </Routes>
       </Router>

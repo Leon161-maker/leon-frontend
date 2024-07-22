@@ -129,7 +129,7 @@ const Mining = () => {
         {/* Tap coin */}
         <div className="text-center">
           <button
-            className="transform transition-transform duration-150 active:translate-y-1 focus:outline-none"
+            className="transform transition-transform duration-0 scale-95 active:scale-100 1 focus:outline-none"
             onClick={handleButtonClick} disabled={!canTap}>
             <img src={TapCoin} />
           </button>
