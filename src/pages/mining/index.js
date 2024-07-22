@@ -4,12 +4,20 @@ import React, { useState, useEffect } from "react";
 import DetailsButton from "../../components/detailsButton";
 
 // images import
-import { ButtonCoin, ButtonLion, CountingCoin, TapCoin, ShockIcon, MainBackground } from '../../assests/svgs/index'
+import { ButtonCoin, ButtonLion, CountingCoin, TapCoin, ShockIcon, MainBackground, Boost } from '../../assests/svgs/index'
+import { Link } from "react-router-dom";
 
 const levelThresholds = [
   { name: "Bronze", maxLevel: 10 },
   { name: "Silver", maxLevel: 20 },
   { name: "Gold", maxLevel: 30 },
+  { name: "Platinum", maxLevel: 40},
+  { name: "Legendary", maxLevel: 50},
+  { name:"Master", maxLevel: 60},
+  { name:"GrandMaster", maxLevel: 70},
+  { name: "Lord", maxLevel: 80},
+  { name: "Creator", maxLevel: 90},
+  { name: "CEO", maxLevel: 10}
 ];
 
 const Mining = () => {
@@ -24,7 +32,7 @@ const Mining = () => {
   const shockDecrement = 10; // Shock value decrement per tap
   const shockIncrement = 5; // Shock value increment over time
   const shockIncrementInterval = 1000; // Interval in milliseconds for shock value increment
-  const coinsPerLevel = 10000; // Coins required to level up
+  const coinsPerLevel = 100; // Coins required to level up
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -52,7 +60,7 @@ const Mining = () => {
       if (newBalance >= coinsPerLevel) {
         setCurrentLevel((prevLevel) => {
           const newLevel = prevLevel + 1;
-          const newTier = levelThresholds.find((threshold) => newLevel <= threshold.maxLevel)?.name || "Bronze";
+          const newTier = levelThresholds.find((threshold) => newLevel <= threshold.maxLevel)?.name || "";
           setCurrentTier(newTier);
           return newLevel;
         });
@@ -91,18 +99,18 @@ const Mining = () => {
           </div>
         </button>
         <button className="bg-gradient-to-b from-[#99E23B] to-[#547C21] px-2 py-1 rounded-lg">
-          <div className="flex items-center gap-x-2">
+          <Link to={'/exchange'}className="flex items-center gap-x-2">
             <img src={ButtonLion} />
             <p className="text-center text-xs text-white">Choose Exchange</p>
-          </div>
+          </Link>
         </button>
       </div>
 
       <div className="bg-gradient-to-b from-[#74561d] via-[#303c20] to-[#303c20] py-6 rounded-t-3xl shadow-lg shadow-[#9b8255]">
         <div className="flex justify-center space-x-4">
           {/* 3 details button */}
-          <DetailsButton className="text-center shadow-lg bg-gray-100 p-3  rounded-md" heading={"Earn per Tap"} IsIcon={true} value={`${perTapValue}`} />
-          <DetailsButton className="text-center shadow-lg bg-gray-100 p-4 rounded-md" heading={"Profit per hour"} IsIcon={true} value={"+1"} />
+          <DetailsButton className="text-center shadow-lg bg-gray-100 p-3  rounded-md" heading={"Earn per Tap"} IsIcon={true} value={`+${perTapValue}`} />
+          <DetailsButton className="text-center shadow-lg bg-gray-100 p-4 rounded-md" heading={"Profit per hour"} IsIcon={true} value={"0"} />
           <DetailsButton className="text-center shadow-lg bg-gray-100 p-4 rounded-md" heading={"Daily Task"} IsIcon={true} value={"0"} />
         </div>
 
@@ -129,24 +137,23 @@ const Mining = () => {
         {/* Tap coin */}
         <div className="text-center">
           <button
-            className="transform transition-transform duration-150 active:translate-y-1 focus:outline-none"
+            className="transform transition-transform duration-150 active:translate-y-1 active:scale-105"
             onClick={handleButtonClick} disabled={!canTap}>
             <img src={TapCoin} />
           </button>
         </div>
 
         {/* Tap health */}
-        <div className="flex items-center justify-between pb-8 pl-4 pr-4 w-full">
-          <div className="flex items-center gap-x-2">
+        <div className="flex items-center pb-8 pl-5 pr-2 w-full">
+          <div className="flex items-center">
             <img src={ShockIcon} alt="Shock Icon" />
             <p className="text-center text-white text-xl">{shockValue}/1000</p>
           </div>
-          <div className="flex items-center gap-x-2">
-            <img src={ShockIcon} alt="Shock Icon" />
+          <div className="flex items-center pl-20">
+            <img src={Boost} alt="Boost Icon" />
             <p className="text-center text-white text-xl">Boost</p>
           </div>
         </div>
-
 
       </div>
     </div>

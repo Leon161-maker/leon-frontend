@@ -9,6 +9,7 @@ import NotFound from "./pages/404";
 import Faqs from "./pages/faqs";
 import Mining from "./pages/mining";
 import InviteFriends from './pages/invite';
+import Exchange from './pages/exchange'
 
 // layouts imports
 import LayoutRoutes from "./routes/layoutRoutes";
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<LayoutRoutes />}>
             <Route path="mining" element={<Mining />} />
             <Route path='/invite' element={<InviteFriends />} />
+            <Route path='/exchange' element={<Exchange />} />
           </Route>
         </Routes>
       </Router>
