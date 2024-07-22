@@ -20,13 +20,13 @@ const Home = () => {
       }}
     >
       {/* Logo */}
-      <img src={LeonLogo} className="w-[66px] mt-4 ml-4" />
+      <img alt="leon-logo" src={LeonLogo} className="w-[66px] mt-4 ml-4" />
 
       {/* text */}
-      <img src={LeonText} className="w-48 m-auto mt-8" />
+      <img alt="leon-text" src={LeonText} className="w-48 m-auto mt-8" />
 
       {/* Lion character Image  */}
-      <img src={LionCharacter} className="m-auto w-72" />
+      <img alt="leon-character" src={LionCharacter} className="m-auto w-72" />
 
       {/* PlayNow button */}
       <div className="flex  justify-center ">
