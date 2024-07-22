@@ -5,6 +5,8 @@ import DetailsButton from "../../components/detailsButton";
 
 // images import
 import { ButtonCoin, ButtonLion, CountingCoin, TapCoin, ShockIcon, MainBackground, Boost } from '../../assests/svgs/index'
+import { Link } from "react-router-dom";
+
 
 const levelThresholds = [
   { name: "Bronze", maxLevel: 10 },
@@ -91,18 +93,18 @@ const Mining = () => {
           </div>
         </button>
         <button className="bg-gradient-to-b from-[#99E23B] to-[#547C21] px-2 py-1 rounded-lg">
-          <div className="flex items-center gap-x-2">
-            <img src={ButtonLion} alt="leon-coin"/>
+          <Link to={'/settings'} className="flex items-center gap-x-2">
+            <img src={ButtonLion} />
             <p className="text-center text-xs text-white">Choose Exchange</p>
-          </div>
+          </Link>
         </button>
       </div>
 
       <div className="bg-gradient-to-b from-[#74561d] via-[#303c20] to-[#303c20] py-6 rounded-t-3xl shadow-lg shadow-[#9b8255]">
         <div className="flex justify-center space-x-4">
           {/* 3 details button */}
-          <DetailsButton className="text-center shadow-lg bg-gray-100 p-3  rounded-md" heading={"Earn per Tap"} IsIcon={true} value={`${perTapValue}`} />
-          <DetailsButton className="text-center shadow-lg bg-gray-100 p-4 rounded-md" heading={"Profit per hour"} IsIcon={true} value={"+1"} />
+          <DetailsButton className="text-center shadow-lg bg-gray-100 p-3  rounded-md" heading={"Earn per Tap"} IsIcon={true} value={`+${perTapValue}`} />
+          <DetailsButton className="text-center shadow-lg bg-gray-100 p-4 rounded-md" heading={"Profit per hour"} IsIcon={true} value={"0"} />
           <DetailsButton className="text-center shadow-lg bg-gray-100 p-4 rounded-md" heading={"Daily Task"} IsIcon={true} value={"0"} />
         </div>
 

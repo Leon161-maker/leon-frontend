@@ -11,12 +11,12 @@ const MainLayout = ({ children }) => {
       <div className="mb-8">{children}</div>
 
       <div className="bg-black rounded-t-3xl flex justify-around py-2 fixed bottom-0 w-full">
-        <Link to={"/"} className="flex flex-col text-center">
+        <Link to={"/mining"} className="flex flex-col text-center">
           <img src={Tap} />
           <p className="text-sm text-[#B1B0B0]">Tap</p>
         </Link>
 
-        <Link to={"/settings"} className="flex flex-col text-center">
+        <Link to={"#"} className="flex flex-col text-center">
           <img src={Task} />
           <p className="text-sm text-[#B1B0B0]">Task</p>
         </Link>
