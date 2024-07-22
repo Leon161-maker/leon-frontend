@@ -86,13 +86,13 @@ const Mining = () => {
       <div className="flex justify-between mx-4 pt-14 pb-10">
         <button className="bg-gradient-to-b from-[#99E23B] to-[#547C21] px-2 py-1 rounded-lg">
           <div className="flex items-center gap-x-2">
-            <img src={ButtonCoin} />
+            <img src={ButtonCoin} alt="leon-coin" />
             <p className="text-center text-xs text-white">Person Name</p>
           </div>
         </button>
         <button className="bg-gradient-to-b from-[#99E23B] to-[#547C21] px-2 py-1 rounded-lg">
           <div className="flex items-center gap-x-2">
-            <img src={ButtonLion} />
+            <img src={ButtonLion} alt="leon-coin"/>
             <p className="text-center text-xs text-white">Choose Exchange</p>
           </div>
         </button>
@@ -108,7 +108,7 @@ const Mining = () => {
 
         {/* Coin counting */}
         <div className="flex items-center">
-          <img className="w-40" src={CountingCoin} />
+          <img className="w-40" src={CountingCoin} alt="leon-counting-coin"/>
           <p className="text-white text-3xl mr-4 font-semibold">{availableBalance}</p>
         </div>
 
@@ -131,7 +131,7 @@ const Mining = () => {
           <button
             className="transform transition-transform duration-0 scale-95 active:scale-100 1 focus:outline-none"
             onClick={handleButtonClick} disabled={!canTap}>
-            <img src={TapCoin} />
+            <img src={TapCoin} alt="tab-coin"/>
           </button>
         </div>
 
